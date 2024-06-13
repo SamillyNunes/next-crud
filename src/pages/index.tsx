@@ -1,21 +1,23 @@
+import ClientCollection from "@/backend/db/ClientCollection";
 import CustomButton from "@/components/CustomButton";
 import Form from "@/components/Form";
 import Layout from "@/components/Layout";
 import Table from "@/components/Table";
 import Client from "@/core/Client";
-import { useState } from "react";
+import ClientRepository from "@/core/ClientRepository";
+import { useEffect, useState } from "react";
 
 export default function Home() {
 
   const [type, setType] = useState<'table' | 'form'>('table');
   const [currentClient, setCurrentClient] = useState<Client>(Client.empty());
+  const [clients, setClients] = useState<Client[]>([]);
 
-  const clients = [
-    new Client('Ana', 34, '1'),
-    new Client('Joana', 22, '2'),
-    new Client('Leonardo', 26, '3'),
-    new Client('Iza', 15, '4'),
-  ];
+  const repo: ClientRepository = new ClientCollection();
+
+  useEffect(()=>{
+    repo.getAll().then(setClients);
+  }, []);
 
   function selectedClient(client: Client){
     setCurrentClient(client);

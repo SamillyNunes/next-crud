@@ -60,12 +60,19 @@ export default function Table(props: TableProps){
         );
     }
 
-    return (
-        <table className="w-full rounded-xl overflow-hidden">
-            {renderHead()}
-            <tbody>
-                {renderData()}
-            </tbody>
-        </table>
-    );
+    return props.clients?.length>0 ? (
+            <table className="w-full rounded-xl overflow-hidden">
+                {renderHead()}
+                <tbody>
+                    {renderData()}
+                </tbody>
+            </table>
+        ) : (
+            <h1 className="text-lg flex justify-center ">
+                Nenhum registro de cliente ainda. 
+            </h1>
+        )
+
+        
+    
 }
