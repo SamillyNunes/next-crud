@@ -13,7 +13,9 @@ export default class ClientCollection implements ClientRepository{
         },
         fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions){
             const data = snapshot.data(options);
-            return new Client(data.name, data.age, data.id);
+            console.log('firebase:');
+            console.log(snapshot);
+            return new Client(data.name, data.age, snapshot.id);
         }
     }
 

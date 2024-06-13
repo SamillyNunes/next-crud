@@ -15,9 +15,7 @@ export default function Home() {
 
   const repo: ClientRepository = new ClientCollection();
 
-  useEffect(()=>{
-    repo.getAll().then(setClients);
-  }, []);
+  useEffect(getAllClients, []);
 
   function selectedClient(client: Client){
     setCurrentClient(client);
@@ -25,12 +23,23 @@ export default function Home() {
   }
 
   function deletedClient(client: Client){
+    repo.delete(client);
+    getAllClients();
     console.log(`Cliente excluido: ${client.name}`);
   }
 
-  function saveClient(client: Client){
-    console.log(client);
-    setType('table');
+  function getAllClients(){
+    
+    repo.getAll().then((clients)=> {
+      setClients(clients);
+      setType('table');
+    });
+  }
+
+  async function saveClient(client: Client){
+    await repo.save(client);
+    getAllClients();
+    
   }
 
   function cancelForm(){
