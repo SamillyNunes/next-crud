@@ -1,4 +1,5 @@
-import AddButton from "@/components/AddButton";
+import CustomButton from "@/components/CustomButton";
+import Form from "@/components/Form";
 import Layout from "@/components/Layout";
 import Table from "@/components/Table";
 import Client from "@/core/Client";
@@ -28,9 +29,10 @@ export default function Home() {
     ">
       <Layout title="Cadastro Simples">
         <div className="flex justify-end">
-          <AddButton classnName="mb-4" color="green">Novo Cliente</AddButton>
+          <CustomButton className="mb-4" color="green">Novo Cliente</CustomButton>
         </div>
         <Table clients={clients} selectedClient={selectedClient} deletedClient={deletedClient} />
+        <Form client={clients[0]}  />
       </Layout>
     </div>
 

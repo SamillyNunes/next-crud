@@ -1,10 +1,10 @@
-interface AddButtonProps{
+interface CustomButtonProps{
     children: any;
     color?: 'green' | 'blue' | 'gray';
-    classnName?: string;
+    className?: string;
 }
 
-export default function AddButton(props: AddButtonProps){
+export default function CustomButton(props: CustomButtonProps){
 
     const color = props.color ?? 'gray';
 
@@ -14,7 +14,7 @@ export default function AddButton(props: AddButtonProps){
                 bg-gradient-to-r from-${color}-400 to-${color}-700
                 text-white
                 px-4 py-2 rounded-md 
-                ${props.classnName}     
+                ${props.className}     
             `}
         >
             {props.children}
