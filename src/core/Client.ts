@@ -6,7 +6,7 @@ export default class Client{
     constructor(name: string, age: number, id: string=''){
         this.#name=name;
         this.#age=age;
-        this.#id='';
+        this.#id=id;
     }
 
     get id(){
