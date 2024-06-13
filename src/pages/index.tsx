@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function Home() {
 
   const [type, setType] = useState<'table' | 'form'>('table');
+  const [currentClient, setCurrentClient] = useState<Client>(Client.empty());
 
   const clients = [
     new Client('Ana', 34, '1'),
@@ -17,7 +18,8 @@ export default function Home() {
   ];
 
   function selectedClient(client: Client){
-    console.log(`Nome do cliente: ${client.name}`);
+    setCurrentClient(client);
+    setType('form');
   }
 
   function deletedClient(client: Client){
@@ -26,6 +28,12 @@ export default function Home() {
 
   function saveClient(client: Client){
     console.log(client);
+    setType('table');
+  }
+
+  function cancelForm(){
+    setType('table');
+    setCurrentClient(Client.empty);
   }
 
   return (
@@ -51,8 +59,8 @@ export default function Home() {
         ) : (
 
           <Form 
-            client={clients[0]}  
-            canceled={()=>setType('table')}
+            client={currentClient}  
+            canceled={cancelForm}
             onClientChanged={saveClient}
           />
         )
