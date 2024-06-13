@@ -2,6 +2,7 @@ interface CustomButtonProps{
     children: any;
     color?: 'green' | 'blue' | 'gray';
     className?: string;
+    onClick?: () => void;
 }
 
 export default function CustomButton(props: CustomButtonProps){
@@ -10,6 +11,7 @@ export default function CustomButton(props: CustomButtonProps){
 
     return (
         <button
+            onClick={props.onClick}
             className={`
                 bg-gradient-to-r from-${color}-400 to-${color}-700
                 text-white

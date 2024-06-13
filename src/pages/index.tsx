@@ -3,8 +3,11 @@ import Form from "@/components/Form";
 import Layout from "@/components/Layout";
 import Table from "@/components/Table";
 import Client from "@/core/Client";
+import { useState } from "react";
 
 export default function Home() {
+
+  const [type, setType] = useState<'table' | 'form'>('table');
 
   const clients = [
     new Client('Ana', 34, '1'),
@@ -21,6 +24,10 @@ export default function Home() {
     console.log(`Cliente excluido: ${client.name}`);
   }
 
+  function saveClient(client: Client){
+    console.log(client);
+  }
+
   return (
     <div className="
       flex justify-center items-center h-screen
@@ -28,11 +35,29 @@ export default function Home() {
       text-white
     ">
       <Layout title="Cadastro Simples">
-        <div className="flex justify-end">
-          <CustomButton className="mb-4" color="green">Novo Cliente</CustomButton>
-        </div>
-        <Table clients={clients} selectedClient={selectedClient} deletedClient={deletedClient} />
-        <Form client={clients[0]}  />
+        {type==='table' ? (
+          <>
+            <div className="flex justify-end">
+              <CustomButton 
+                onClick={()=> setType('form')}
+                className="mb-4" 
+                color="green"
+              >
+                Novo Cliente
+              </CustomButton>
+            </div>
+            <Table clients={clients} selectedClient={selectedClient} deletedClient={deletedClient} />
+          </>
+        ) : (
+
+          <Form 
+            client={clients[0]}  
+            canceled={()=>setType('table')}
+            onClientChanged={saveClient}
+          />
+        )
+
+        }
       </Layout>
     </div>
 

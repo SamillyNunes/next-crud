@@ -4,7 +4,9 @@ import Client from "@/core/Client";
 import CustomButton from "./CustomButton";
 
 interface FormProps{
-    client?: Client
+    client?: Client;
+    canceled?: ()=> void;
+    onClientChanged?: (client: Client) => void;
 }
 
 export default function Form(props: FormProps){
@@ -39,10 +41,14 @@ export default function Form(props: FormProps){
             />
 
             <div className="flex justify-end mt-7">
-                <CustomButton color="blue" className="mr-2">
+                <CustomButton 
+                    onClick={()=> props.onClientChanged?.(new Client(name, age, id ?? ''))}
+                    color="blue" 
+                    className="mr-2"
+                >
                     {id ? 'Alterar' : 'Salvar'}
                 </CustomButton>
-                <CustomButton>
+                <CustomButton onClick={props.canceled}>
                     Cancelar
                 </CustomButton>
             </div>
