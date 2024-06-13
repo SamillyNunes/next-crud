@@ -15,6 +15,18 @@ const config: Config = {
       },
     },
   },
+  // Todas as classes que eu quero que estejam presentes na versao final
+  safelist: [
+    {
+      pattern: /^bg-/,
+    },
+    {
+      pattern: /^from-/
+    },
+    {
+      pattern: /^to-/
+    }
+  ],
   plugins: [],
 };
 export default config;
