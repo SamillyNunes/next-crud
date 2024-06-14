@@ -22,8 +22,8 @@ export default function Home() {
     setType('form');
   }
 
-  function deletedClient(client: Client){
-    repo.delete(client);
+  async function deletedClient(client: Client){
+    await repo.delete(client);
     getAllClients();
     console.log(`Cliente excluido: ${client.name}`);
   }
